@@ -21,7 +21,7 @@ public class rBoardWriteProAction implements Action {
 		// TODO Auto-generated method stub
 		String realFolder = "";
 
-		String saveFolder = "images";
+		String saveFolder = "Image/review";
 
 		String encType = "UTF-8";
 
@@ -31,7 +31,7 @@ public class rBoardWriteProAction implements Action {
 
 		realFolder = context.getRealPath(saveFolder);
 		
-		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
+		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType="multipart/form-data", new DefaultFileRenamePolicy());
 		
 		ReviewBoardVO reviewBoardVO = new ReviewBoardVO();
 		reviewBoardVO.setContent(request.getParameter("content"));
