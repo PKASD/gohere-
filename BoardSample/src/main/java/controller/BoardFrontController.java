@@ -17,6 +17,7 @@ import action.qBoardListAction;
 import action.BoardUpdateFormAction;
 import action.BoardUpdateProAction;
 import action.LoginFormAction;
+import action.ReviewContentAction;
 import action.randomFormAction;
 import action.tripFormAction;
 import action.SignInFormAction;
@@ -135,6 +136,16 @@ public class BoardFrontController extends HttpServlet {
 
 		else if (command.contentEquals("/rBoardList.bo")) {
 			action = new rBoardListAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if (command.contentEquals("/reviewContent.bo")) {
+			action = new ReviewContentAction();
 
 			try {
 				forward = action.execute(request, response);

@@ -6,14 +6,8 @@
 <%@ include file="/view/color.jsp"%>
 
 <%
-List<ReviewBoardVO> articleList = (List<ReviewBoardVO>) request.getAttribute("articleList");
-PageVO pageVO = (PageVO) request.getAttribute("pageVO");
-int count = pageVO.getCount();
-int number = pageVO.getNumber();
-int currentPage = pageVO.getCurrentPage();
-int startPage = pageVO.getStartPage();
-int pageCount = pageVO.getPageCount();
-int endPage = pageVO.getEndPage();
+List<ReviewBoardVO> reviewArticleList = (List<ReviewBoardVO>) request.getAttribute("reviewArticleList");
+List<BoardVO> articleList = (List<BoardVO>) request.getAttribute("articleList");
 %>
 
 <html>
@@ -289,10 +283,6 @@ input[type=text] {
 	right: 20px;
 }
 
-.slider_1>.slick-next:before {
-	content: "\f054";
-}
-
 .slick-slide {
 	transition: all ease-in-out .3s;
 }
@@ -377,7 +367,31 @@ input[type=text] {
 		</nav>
 	</header>
 
+	<section class="sec0">
+		<div class=" single-item slider_1">
+			<div class="tripbg1" style="position: relative;">
+				<p class="slide_Img_Text_Name1">
+					동유럽에서 즐기는 <br>크리스마스 Markets
+				</p>
+			</div>
 
+			<div class="tripbg2" style="position: relative;">
+				<p class="slide_Img_Text_Name1">
+					남미에서 즐기는 <br>크리스마스 Markets
+				</p>
+			</div>
+			<div class="tripbg3" style="position: relative;">
+				<p class="slide_Img_Text_Name1">
+					중동에서 즐기는 <br>크리스마스 Markets
+				</p>
+			</div>
+			<div class="tripbg4" style="position: relative;">
+				<p class="slide_Img_Text_Name1">
+					우주에서 즐기는 <br>크리스마스 Markets
+				</p>
+			</div>
+		</div>
+	</section>
 	<section class="sec2">
 		<div class="col-sm-3 sidenav">
 			<br>
@@ -387,7 +401,7 @@ input[type=text] {
 				<h1>어디가고 싶은지 고민될 때? 클릭해봐 !</h1>
 			</div>
 			<div>
-				<button type="button" class="navybtn" onclick="location.href='Random_Main.html'" style="border: 0;">
+				<button type="button" class="navybtn" onclick="location.href='randomForm.bo'" style="border: 0;">
 					<img src="Image/map.jpg" style="width: 500px; height: 350px;">
 				</button>
 				<div style="font-size: large;">
@@ -413,79 +427,25 @@ input[type=text] {
 			</div>
 
 			<div style="display: flex;">
-			<%
-			for (int i = 0; i < 5; i++) { // 게시글 생성
-				ReviewBoardVO article = (ReviewBoardVO) articleList.get(i);
-			%>
+				<%
+				for (int i = 0; i < 5; i++) { // 게시글 생성
+					ReviewBoardVO article = (ReviewBoardVO) reviewArticleList.get(i);
+				%>
 				<div style="width: 18rem; float: left;">
-					<img src="Image/여행지1.jpg" class="review_List_Img" alt="...">
+					<img src="Image/review/rev<%=i + 1%>.jpg" class="review_List_Img" alt="...">
 					<div class="review_List">
 						<p>
-							<span><img src="Image/여행지<%=i+1%>.jpg" alt="..." style="border-radius: 100%; width: 25px; height: 25px;"><%=article.getWriter()%></span>
+							<span><img src="Image/여행지<%=i + 1%>.jpg" alt="..." style="border-radius: 100%; width: 25px; height: 25px;"><%=article.getWriter()%></span>
 						</p>
 						<div style="width: 200px; height: 50px;">
-							<p class="card-Text" style="margin-top: -15px;"></p>
+							<p class="card-Text" style="margin-top: -15px; margin-left: 5px;"><%=article.getSubject()%></p>
 						</div>
-						<i class="fa-regular fa-heart" style="color: gray;"></i>
-						<span> 0</span> <i class="fa-regular fa-message" style="color: gray;"></i><span>
-							3</span>
+						<i class="fa-regular fa-heart" style="color: gray;"></i><span>0</span> <i class="fa-regular fa-message" style="color: gray;"></i><span>3</span>
 					</div>
 				</div>
 				<%
 				}
 				%>
-				<div style="width: 18rem; float: left;">
-					<img src="Image/여행지2.jpg" class="review_List_Img" alt="...">
-					<div class="review_List">
-						<p>
-							<span><img src="Image/여행지2.jpg" alt="..." style="border-radius: 100%; width: 25px; height: 25px;"> </span>작성자
-						</p>
-						<div style="width: 200px; height: 50px;">
-							<p class="card-Text" style="margin-top: -15px;">리뷰 게시판 제목</p>
-						</div>
-						<i class="fa-regular fa-heart" style="color: gray;"></i><span> 0</span> <i class="fa-regular fa-message" style="color: gray;"></i><span>
-							3</span>
-					</div>
-				</div>
-				<div style="width: 18rem; float: left;">
-					<img src="Image/여행지3.jpg" class="review_List_Img" alt="...">
-					<div class="review_List">
-						<p>
-							<span><img src="Image/여행지3.jpg" alt="..." style="border-radius: 100%; width: 25px; height: 25px;"> </span>작성자
-						</p>
-						<div style="width: 200px; height: 50px;">
-							<p class="card-Text" style="margin-top: -15px;">리뷰 게시판 제목</p>
-						</div>
-						<i class="fa-regular fa-heart" style="color: gray;"></i><span> 0</span> <i class="fa-regular fa-message" style="color: gray;"></i></i><span>
-							3</span>
-					</div>
-				</div>
-				<div style="width: 18rem; float: left;">
-					<img src="Image/여행지4.jpg" class="review_List_Img" alt="...">
-					<div class="review_List">
-						<p>
-							<span><img src="Image/여행지4.jpg" alt="..." style="border-radius: 100%; width: 25px; height: 25px;"> </span>작성자
-						</p>
-						<div style="width: 200px; height: 50px;">
-							<p class="card-Text" style="margin-top: -15px;">리뷰 게시판 제목</p>
-						</div>
-						<i class="fa-regular fa-heart" style="color: gray;"></i><span> 0</span> <i class="fa-regular fa-message" style="color: gray;"></i></i><span>
-							3</span>
-					</div>
-				</div>
-				<div style="width: 18rem; float: left;">
-					<img src="Image/여행지4.jpg" class="review_List_Img" alt="...">
-					<div class="review_List">
-						<p>
-							<span><img src="Image/여행지4.jpg" alt="..." style="border-radius: 100%; width: 25px; height: 25px;"> </span>작성자
-						</p>
-						<div style="width: 200px; height: 50px;">
-							<p class="card-Text" style="margin-top: -15px;">리뷰 게시판 제목</p>
-						</div>
-						<i class="fa-regular fa-heart" style="color: gray;"></i><span> 0</span> <i class="fa-regular fa-message" style="color: gray;"></i></i><span>
-							3</span>
-					</div>
-				</div>
 			</div>
 		</div>
 		</div>
@@ -499,67 +459,19 @@ input[type=text] {
 			<h1>설레는 곳, 그게 바로 여행이지 !</h1>
 		</div>
 		<div class="center slider">
+			<%
+			for (int i = 1; i <= 10; i++) {
+			%>
 			<div style="position: relative;">
 				<a href="">
-					<p class="slide_Img_Text_Content">여긴 여행지 설명</p> <img class="slide_Img" src="Image\S_img (1).jpg">
+					<p class="slide_Img_Text_Content">여행지 설명</p> <img class="slide_Img" src="Image\S_img (<%=i%>).jpg">
 					<p class="slide_Img_Text_Name2">이름</p>
 				</a>
 			</div>
-			<div style="position: relative;">
-				<a href="">
-					<p class="slide_Img_Text_Content">여긴 여행지 설명</p> <img class="slide_Img" src="Image\S_img (2).jpg">
-					<p class="slide_Img_Text_Name2">이름</p>
-				</a>
-			</div>
-			<div style="position: relative;">
-				<a href="">
-					<p class="slide_Img_Text_Content">여긴 여행지 설명</p> <img class="slide_Img" src="Image\S_img (3).jpg">
-					<p class="slide_Img_Text_Name2">이름</p>
-				</a>
-			</div>
-			<div style="position: relative;">
-				<a href="">
-					<p class="slide_Img_Text_Content">여긴 여행지 설명</p> <img class="slide_Img" src="Image\S_img (4).jpg">
-					<p class="slide_Img_Text_Name2">이름</p>
-				</a>
-			</div>
-			<div style="position: relative;">
-				<a href="">
-					<p class="slide_Img_Text_Content">여긴 여행지 설명</p> <img class="slide_Img" src="Image\S_img (5).jpg">
-					<p class="slide_Img_Text_Name2">이름</p>
-				</a>
-			</div>
-			<div style="position: relative;">
-				<a href="">
-					<p class="slide_Img_Text_Content">여긴 여행지 설명</p> <img class="slide_Img" src="Image\S_img (6).jpg">
-					<p class="slide_Img_Text_Name2">이름</p>
-				</a>
-			</div>
-			<div style="position: relative;">
-				<a href="">
-					<p class="slide_Img_Text_Content">여긴 여행지 설명</p> <img class="slide_Img" src="Image\S_img (7).jpg">
-					<p class="slide_Img_Text_Name2">이름</p>
-				</a>
-			</div>
-			<div style="position: relative;">
-				<a href="">
-					<p class="slide_Img_Text_Content">여긴 여행지 설명</p> <img class="slide_Img" src="Image\S_img (8).jpg">
-					<p class="slide_Img_Text_Name2">이름</p>
-				</a>
-			</div>
-			<div style="position: relative;">
-				<a href="">
-					<p class="slide_Img_Text_Content">여긴 여행지 설명</p> <img class="slide_Img" src="Image\S_img (9).jpg">
-					<p class="slide_Img_Text_Name2">이름</p>
-				</a>
-			</div>
-			<div style="position: relative;">
-				<a href="">
-					<p class="slide_Img_Text_Content">여긴 여행지 설명</p> <img class="slide_Img" src="Image\S_img (10).jpg">
-					<p class="slide_Img_Text_Name2">이름</p>
-				</a>
-			</div>
-		</div>
+			<%
+			}
+			%>
+		
 	</section>
 
 	<section class="sec3">
@@ -572,107 +484,24 @@ input[type=text] {
 				<h1>궁금한게 생겻을 땐 여기서 질문 !</h1>
 			</div>
 			<div class="board">
+
 				<ul style="display: flex; border-bottom: 3px solid gray;">
 					<li class="board_Header_Label"><span>질문 게시판</span></li>
-					<li class="board_Header_Plus"><a href="QnAboard.html">더보기+</a></li>
+					<li class="board_Header_Plus"><a href="qBoardList.bo">더보기+</a></li>
 				</ul>
 				<div>
 					<ul class="board_Content" style="border-right: dotted 1px;">
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다가나다라마바사나다라마바사가나다라마바사나다라마바사가나다라마바사나다라마바사라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다가나다라마바사나다라마바사가나다라마바사나다라마바사가나다라마바사나다라마바사라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다가나다라마바사나다라마바사가나다라마바사나다라마바사가나다라마바사나다라마바사라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다가나다라마바사나다라마바사가나다라마바사나다라마바사가나다라마바사나다라마바사라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다가나다라마바사나다라마바사가나다라마바사나다라마바사가나다라마바사나다라마바사라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다가나다라마바사나다라마바사가나다라마바사나다라마바사가나다라마바사나다라마바사라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다가나다라마바사나다라마바사가나다라마바사나다라마바사가나다라마바사나다라마바사라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다가나다라마바사나다라마바사가나다라마바사나다라마바사가나다라마바사나다라마바사라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다가나다라마바사나다라마바사가나다라마바사나다라마바사가나다라마바사나다라마바사라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-					</ul>
-					<ul class="board_Content">
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Reply"><span>[3]</span></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Reply"><span>[3]</span></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Reply"><span>[3]</span></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Reply"><span>[3]</span></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Reply"><span>[3]</span></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Reply"><span>[3]</span></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Reply"><span>[3]</span></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
-						<ui class="board_Content_Label">
-						<li class="board_Content_Label_Label"><a href="">가나다라마바사나다라마바사</a></li>
-						<li class="board_Content_Label_Reply"><span>[3]</span></li>
-						<li class="board_Content_Label_Writer"><span>작성자</span></li>
-						</li>
-						</ui>
+						<%
+						for (int i = 0; i < 7; i++) { // 게시글 생성
+							BoardVO article = (BoardVO) articleList.get(i);
+						%>
+						<ul class="board_Content_Label">
+						<li class="board_Content_Label_Label"><a href="boardContent.bo?num=<%=article.getNum()%>"><%=article.getSubject()%></a></li>
+						<li class="board_Content_Label_Writer"><span><%=article.getWriter()%></span></li>
+						</ul>
+						<%
+						}
+						%>
 					</ul>
 				</div>
 			</div>
@@ -685,71 +514,60 @@ input[type=text] {
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
 	<script src="./css/slick/slick.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		$(document)
-				.on(
-						'ready',
-						function() {
-							$('.single-item')
-									.slick(
-											{
-												arrows : true,
-												infinite : true, //무한 반복 옵션	
-												prevArrow : '<button class="slick-prev"></button>',
-												nextArrow : '<button class="slick-next"></button>',
-												responsive : [ // 반응형 웹 구현 옵션
+		$(document).on('ready', function() {
+			$('.single-item').slick({
+				arrows : true,
+				infinite : true, //무한 반복 옵션	
+				prevArrow : '<button class="slick-prev"></button>',
+				nextArrow : '<button class="slick-next"></button>',
+				responsive : [ // 반응형 웹 구현 옵션
 
-												{
-													breakpoint : 960, //화면 사이즈 960px
-													settings : {
-														//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-														slidesToShow : 3
-													}
-												}, {
-													breakpoint : 768, //화면 사이즈 768px
-													settings : {
-														//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-														slidesToShow : 2
-													}
-												} ]
-											});
+				{
+					breakpoint : 960, //화면 사이즈 960px
+					settings : {
+						//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+						slidesToShow : 3
+					}
+				}, {
+					breakpoint : 768, //화면 사이즈 768px
+					settings : {
+						//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+						slidesToShow : 2
+					}
+				} ]
+			});
 
-							$(".center")
-									.slick(
-											{
-												infinite : true, //무한 반복 옵션	
-												dots : true,
-												centerMode : true,
-												slidesToShow : 1, // 한 화면에 보여질 컨텐츠 개수
-												slidesToScroll : 1, //스크롤 한번에 움직일 컨텐츠 개수
-												autoplay : true, // 자동 스크롤 사용 여부
-												autoplaySpeed : 0, // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
-												speed : 5000,
-												cssEase : 'linear',
-												pauseOnHover : true, // 슬라이드 이동 시 마우스 호버하면 슬라이더 
-												prevArrow : "<button type='button' class='slick-prev'></button>", // 이전 화살표 모양 설정
-												nextArrow : "<button type='button' class='slick-next'></button>", // 다음 화살표 모양 설정
-												dotsClass : "slick-dots", //아래 나오는 페이지네이션(점) css class 지정
-												draggable : true, //드래그 가능 여부 
-												variableWidth : true, //사진마다 width의 크기가 다른가? 
-												pauseOnDotsHover : true, //네이게이션버튼 호버 시 슬라이드 멈춤
+			$(".center").slick({
+				infinite : true, //무한 반복 옵션	
+				centerMode : true,
+				slidesToShow : 1, // 한 화면에 보여질 컨텐츠 개수
+				slidesToScroll : 1, //스크롤 한번에 움직일 컨텐츠 개수
+				autoplay : true, // 자동 스크롤 사용 여부
+				autoplaySpeed : 0, // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+				speed : 5000,
+				cssEase : 'linear',
+				pauseOnHover : true, // 슬라이드 이동 시 마우스 호버하면 슬라이더 
+				draggable : true, //드래그 가능 여부 
+				variableWidth : true, //사진마다 width의 크기가 다른가? 
+				pauseOnDotsHover : true, //네이게이션버튼 호버 시 슬라이드 멈춤
 
-												responsive : [ // 반응형 웹 구현 옵션
-												{
-													breakpoint : 960, //화면 사이즈 960px
-													settings : {
-														//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-														slidesToShow : 3
-													}
-												}, {
-													breakpoint : 768, //화면 사이즈 768px
-													settings : {
-														//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-														slidesToShow : 2
-													}
-												} ]
+				responsive : [ // 반응형 웹 구현 옵션
+				{
+					breakpoint : 960, //화면 사이즈 960px
+					settings : {
+						//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+						slidesToShow : 3
+					}
+				}, {
+					breakpoint : 768, //화면 사이즈 768px
+					settings : {
+						//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+						slidesToShow : 2
+					}
+				} ]
 
-											});
-						});
+			});
+		});
 	</script>
 
 </body>

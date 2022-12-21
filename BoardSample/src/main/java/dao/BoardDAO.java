@@ -103,31 +103,22 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		int num = article.getNum();
-		int number = 0;
 		// 새로운 관련글 번호를 저장할 변수
-		String sql = "";
+		String sql = "insert into reviewboard(num,writer,subject,reg_date,readCount,recommend,content,reviewImage)" 
+		+ " values(board_seq.nextval,?,?,?,?,?,?,?)";
 
 		try {
-			pstmt = con.prepareStatement("select max(num) from reviewboard");
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) // 기존에 작성된 글이 있으면, 지금 작성한 글이 첫번째 글이 아니면
-				number = rs.getInt(1) + 1;// 지금까지 사용되지 않은 새로운 관련글 번호를 얻는 부분
-			else
-				number = 1;
-
-			sql = "insert into reviewboard" + "(num,writer,subject,reg_date,content,reviewimage) + " +
-			" values(board_seq.nextval,?,?,?,?,?,?,?)";
-
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, article.getWriter());
 			pstmt.setString(2, article.getSubject());
 			pstmt.setTimestamp(3, article.getReg_date());
 			pstmt.setString(4, article.getContent());
-			pstmt.setString(5, article.getReviewImage());
+			pstmt.setInt(5, 0);
+			pstmt.setInt(6, 0);
+			pstmt.setString(7, article.getReviewImage());
 
 			insertCount = pstmt.executeUpdate();
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -232,9 +223,7 @@ public class BoardDAO {
 		List<ReviewBoardVO> articleList = null;
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = con.prepareStatement("select list2.* from(select rownum r, list1.* "
-					+ "from(select *  from reviewBoard order by num desc) list1) "
-					+ "list2 where r between ? and ?");
+			pstmt = con.prepareStatement("select list2.* from(select rownum r, list1.* " + "from(select *  from reviewBoard order by num desc) list1) " + "list2 where r between ? and ?");
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, startRow + pageSize - 1);
 			rs = pstmt.executeQuery();

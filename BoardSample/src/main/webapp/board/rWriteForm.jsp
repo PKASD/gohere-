@@ -135,7 +135,7 @@ int re_level = replyVO.getRe_level();
 			</div>
 		</section>
 	</header>
-	<form method="post" name="writeform" action="boardWritePro.bo">
+	<form method="post" name="writeform" action="rBoardWritePro.bo">
 		<input type="hidden" name="num" value="<%=num%>"> <input type="hidden" name="ref" value="<%=ref%>"> <input type="hidden"
 			name="re_step" value="<%=re_step%>"
 		> <input type="hidden" name="re_level" value="<%=re_level%>">
@@ -159,17 +159,18 @@ int re_level = replyVO.getRe_level();
 				}
 				%>
 			</div>
+			<div class="form-group">
+				<label>◎ 작성자</label> <input type="text" class="form-control" id="writer" name="writer" placeholder="작성자" required />
+			</div>
 
 			<div class="form-group">
 				<label>◎ 내용</label>
 				<textarea class="form-control" id="content" rows="5" name="content" placeholder="내용을 입력하세요." required></textarea>
 			</div>
-			
+
 			<div>
-				<label for="exampleFormControlTextarea1">◎ 사진첨부</label>
-				<div class="input-group mb-3">
+				<label for="exampleFormControlTextarea1">◎ 사진 첨부</label>
 					<input type="file" class="form-control" id="inputGroupFile02" name="reviewImage">
-				</div>
 			</div>
 			<br>
 

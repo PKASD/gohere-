@@ -24,6 +24,18 @@ content varchar2(4000) not null, -- 글 내용
 reviewImage varchar2(4000) not null -- 이미지
 );
 
+create table tripBoard(
+num NUMBER primary key , -- 게시판 글 번호
+subject varchar(50) not null,-- 글제목
+subTitle varchar(50) not null,-- 부제목
+area varchar(50) not null,-- 지역
+address varchar(500) not null,-- 주소
+reg_date timestamp(6) not null,--작성일,소수점 이하 6자리
+readcount NUMBER default 0,-- 조회수, default = 값이 없으면 0
+content varchar2(4000) not null, -- 글 내용
+reviewImage varchar2(4000) not null -- 이미지
+);
+
 CREATE SEQUENCE reviewBoard_seq;
 
 DROP SEQUENCE reviewBoard_seq;

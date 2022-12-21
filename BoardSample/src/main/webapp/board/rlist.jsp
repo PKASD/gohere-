@@ -269,7 +269,7 @@ h1 {
 		</div>
 
 		<div style="margin-top: 5%; margin-right: 5%; text-align: right;">
-			<a href="reviewwrite.html" class="btn btn-outline-info btn active" role="button" aria-disabled="true">글등록</a>
+			<a href="rBoardWriteForm.bo" class="btn btn-outline-info btn active" role="button" aria-disabled="true">글등록</a>
 		</div>
 
 		<div class="pgnt" style="margin-top: 3em;">

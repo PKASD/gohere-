@@ -28,6 +28,7 @@ public class indexFormAction implements Action {
 
 		int currentPage = Integer.parseInt(pageNum);
 		// 페이징 처리할 때 페이지 번호로 연산을 하기위해서 정수타입으로 변환
+		
 		int startRow = (currentPage - 1) * pageSize + 1;
 		// 해당 페이지에 출력될 첫번째 글의 레코드 번호
 		// 1페이지
@@ -38,60 +39,23 @@ public class indexFormAction implements Action {
 		int count = 0;
 		// 총 글의 개수를 저장할 변수
 
-		int number = 0;
-		// 해당 페이지에 출력되는 첫 번째 글의 글 번호
-
-		List<ReviewBoardVO> articleList = null;
+		List<ReviewBoardVO> reviewArticleList = null;
 		ReviewBoardListService reviewBoardListService = new ReviewBoardListService();
 
+		List<BoardVO> articleList = null;
+		BoardListService boardListService = new BoardListService();
+		
 		count = reviewBoardListService.getArticleCount();
 		// 전체 글의 개수 얻어오기
 
 		if (count > 0) {
-			articleList = reviewBoardListService.getArticles(startRow, pageSize);
+			reviewArticleList = reviewBoardListService.getArticles(startRow, pageSize);
+			articleList = boardListService.getArticles(startRow, pageSize);
 		}
 
-		number = count - (currentPage - 1) * pageSize;
-		// 페이지 번호 : 1
-		// 총 글의 개수 : 123
-		// 123 - (1 - 1)*10 ==> 123
-
-		int pageCount = 0;
-		int startPage = 0;
-		int endPage = 0;
-		if (count > 0) {
-			pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-			// 총 페이지 개수
-			// 123
-			// 123/10+1==>13
-
-			startPage = (int) ((currentPage - 1) / 10) * 10 + 1;
-			// 하나의 페이지 그룹의 시작 페이지 번호
-			// 현재 페이지 : 3
-			// (3 / 10) * 10 + 1 ==> 1
-			// 현재 페이지 : 10
-			// (10/10)*10+1==>11
-
-			int pageBlock = 10;// 한 페이지에 묶여서 출력되는 페이지들의 그룹
-
-			endPage = startPage + pageBlock - 1;
-			// 하나의 페이지 그룹의 마지막 페이지 번호
-
-			if (endPage > pageCount)
-				endPage = pageCount;
-			// 마지막 페이지 그룹인 경우
-		}
+		request.setAttribute("reviewArticleList", reviewArticleList);
 		request.setAttribute("articleList", articleList);
-		PageVO pageVO = new PageVO();
-
-		pageVO.setCount(count);
-		pageVO.setCurrentPage(currentPage);
-		pageVO.setEndPage(endPage);
-		pageVO.setNumber(number);
-		pageVO.setPageCount(pageCount);
-		pageVO.setStartPage(startPage);
-
-		request.setAttribute("pageVO", pageVO);
+		
 		ActionForward forward = new ActionForward();
 		forward.setUrl("board/indexForm.jsp");
 		
