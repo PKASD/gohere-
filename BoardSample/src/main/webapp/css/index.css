@@ -1,0 +1,308 @@
+body {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	font-family: Happy;
+	text-align: center;
+}
+
+.content {
+	text-align: center;
+	float: left;
+	width: 60%;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: black;
+}
+
+.navbar-brand {
+	font-family: jeju;
+	font-size: 2rem;
+}
+
+.sidenav {
+	float: left;
+	width: 20%;
+}
+
+.sec0 {
+	height: 875px;
+	width: 100%;
+}
+
+.sec1 {
+	padding-top: 100px;
+	height: 700px;
+	width: 100%;
+}
+
+.sec2 {
+	height: 700px;
+	width: 100%;
+	padding-top: 120px;
+	background-color: #ebebeb;
+}
+
+.sec3 {
+	padding-top: 120px;
+	height: 500px;
+	width: 100%;
+}
+
+.sec_Title {
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.input_Btn {
+	color: rgb(109, 109, 109);
+	border: none;
+	width: 100px;
+	height: 50px;
+	font-size: 15px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	border-radius: 15px;
+}
+
+.side_title {
+	font-size: large;
+	font-weight: bold;
+}
+
+.review_List_Img {
+	border-radius: 20px;
+	width: 200px;
+	height: 200px;
+}
+
+.review_List {
+	text-align: left;
+	margin-left: 18px;
+	margin-top: 10px;
+	line-height: 25px;
+}
+
+input[type=text] {
+	margin-left: 30px;
+	width: 300px;
+	height: 50px;
+	border-radius: 10px;
+}
+
+.nav-item {
+	padding-left: 30px;
+	font-weight: bold;
+}
+
+.sliding-u-l-r-l {
+	display: inline-block;
+	position: relative;
+	font-size: 1.5rem;
+}
+
+.sliding-u-l-r-l:before {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 3px;
+	width: 0;
+	transition: width 0s ease, background .5s ease;
+}
+
+.sliding-u-l-r-l:after {
+	content: '';
+	display: block;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	height: 3px;
+	width: 0;
+	background: #88B2AB;
+	transition: width .5s ease;
+}
+
+.sliding-u-l-r-l:hover:before {
+	width: 100%;
+	background: #88B2AB;
+	transition: width .5s ease;
+}
+
+.sliding-u-l-r-l:hover:after {
+	width: 100%;
+	background: transparent;
+	transition: all 0s ease;
+}
+
+.tripbg1, .tripbg2, .tripbg3, .tripbg4 {
+	height: 845px;
+	background-size: cover;
+	background-repeat: none;
+}
+
+.tripbg1 {
+	background-image:
+		url('https://img-kyowontour.kyowontour.com/hp/202211/20221116083102032rsgvfsaijljxxex.jpg');
+}
+
+.tripbg2 {
+	background-image:
+		url('https://img-kyowontour.kyowontour.com/hp/202211/20221116173214057kwdehherwvjqbwh.jpg');
+}
+
+.tripbg3 {
+	background-image:
+		url('https://img-kyowontour.kyowontour.com/hp/202211/20221117150439821trugbnutfqrjpqa.jpg');
+}
+
+.tripbg4 {
+	background-image:
+		url('https://img-kyowontour.kyowontour.com/hp/202212/20221201155509416vsulgwjjknlghgj.jpg');
+}
+
+.slide_Img {
+	height: 300px;
+	width: 100px;
+	border-radius: 40px;
+}
+
+.slide_Img_Text_Content, .slide_Img_Text_Name1, .slide_Img_Text_Name2 {
+	letter-spacing: 1px;
+	position: absolute;
+	color: white;
+	font-weight: bold;
+	text-align: left;
+}
+
+.slide_Img_Text_Content {
+	top: 10%;
+	left: 10%;
+	font-size: 25px;
+}
+
+.slide_Img_Text_Name1 {
+	top: 75%;
+	left: 5%;
+	font-size: 65px;
+	font-family: Happy;
+	letter-spacing: -6px;
+	line-height: 1.1;
+}
+
+.slide_Img_Text_Name2 {
+	top: 75%;
+	left: 10%;
+	font-size: 30px;
+	font-family: Happy;
+	font-style: italic;
+}
+
+.slider_1 {
+	width: 100%;
+	margin: 100px auto;
+}
+
+.slider {
+	width: 90%;
+	margin: 100px auto;
+}
+
+.slick-slide img {
+	width: 400px;
+	margin: 0px 20px;
+}
+
+.slider_1>.slick-arrow {
+	position: absolute;
+	top: 50%;
+	border: 0;
+	border-radius: 100%;
+	padding: 0;
+	height: 100px;
+	width: 100px;
+	display: block;
+	background: white;
+	color: transparent;
+	font-size: 0;
+	transform: translate(0, -50%);
+	outline: 0;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.slider_1>.slick-prev {
+	left: 20px;
+}
+
+.slider_1>.slick-prev:before {
+	content: "\f053";
+}
+
+.slider_1>.slick-next {
+	right: 20px;
+	content: "\f054";
+}
+
+.slick-slide {
+	transition: all ease-in-out .3s;
+}
+
+.board {
+	display: inline-block;
+	border-top: 3px solid rgb(117, 255, 220);
+	width: 1000px;
+}
+
+.board_Content {
+	margin-top: -10px;
+	float: left;
+	width: 50%;
+}
+
+.board_Header_Label {
+	width: 70%;
+	text-align: left;
+	padding-left: 100px;
+}
+
+.board_Header_Plus {
+	width: 30%;
+	text-align: right;
+	padding-right: 15px;
+}
+
+.board_Content_Label {
+	display: flex;
+	margin-left: -32px;
+}
+
+.board_Content_Label_Label {
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	text-align: left;
+	padding-left: 30px;
+	width: 75%;
+}
+
+.board_Content_Label_Writer {
+	width: 25%;
+}
+
+.card-Text {
+	display: block;
+	overflow: hidden;
+	white-space: normal;
+	text-overflow: ellipsis;
+}
