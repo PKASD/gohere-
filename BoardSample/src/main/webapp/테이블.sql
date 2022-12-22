@@ -13,6 +13,8 @@ content varchar2(4000) not null, -- 글 내용
 ip varchar(20) not null -- 작성자 아이피
 );
 
+ALTER TABLE board DROP COLUMN ip;
+
 create table reviewBoard(
 num NUMBER primary key , -- 게시판 글 번호
 writer varchar(10) not null, -- 작성자
@@ -23,6 +25,8 @@ recommend NUMBER not null,-- 추천 수
 content varchar2(4000) not null, -- 글 내용
 reviewImage varchar2(4000) not null -- 이미지
 );
+
+ALTER TABLE reviewBoard DROP COLUMN lat;
 
 create table tripBoard(
 num NUMBER primary key , -- 게시판 글 번호

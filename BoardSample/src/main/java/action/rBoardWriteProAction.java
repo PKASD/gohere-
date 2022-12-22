@@ -25,23 +25,23 @@ public class rBoardWriteProAction implements Action {
 
 		String encType = "UTF-8";
 
-		int maxSize = 5 * 1024 * 1024;// 5MB
+		int maxSize = 100 * 1024 * 1024;
 
 		ServletContext context = request.getServletContext();
 
 		realFolder = context.getRealPath(saveFolder);
-		
-		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType="multipart/form-data", new DefaultFileRenamePolicy());
-		
+
+		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
+
 		ReviewBoardVO reviewBoardVO = new ReviewBoardVO();
-		reviewBoardVO.setContent(request.getParameter("content"));
-		reviewBoardVO.setNum(Integer.parseInt(request.getParameter("num")));
+		reviewBoardVO.setContent(multi.getParameter("content"));
+		reviewBoardVO.setNum(Integer.parseInt(multi.getParameter("num")));
 		String serverFileName = multi.getFilesystemName("reviewImage");
 		reviewBoardVO.setReviewImage(serverFileName.substring(0, serverFileName.indexOf(".")));
 		reviewBoardVO.setReg_date(new Timestamp(System.currentTimeMillis()));
-		reviewBoardVO.setSubject(request.getParameter("subject"));
-		reviewBoardVO.setWriter(request.getParameter("writer"));
-		
+		reviewBoardVO.setSubject(multi.getParameter("subject"));
+		reviewBoardVO.setWriter(multi.getParameter("writer"));
+
 		ReviewBoardWriteProService reviewBoardWirteProService = new ReviewBoardWriteProService();
 		boolean registSuccess = reviewBoardWirteProService.writeArticle(reviewBoardVO);
 
@@ -50,12 +50,21 @@ public class rBoardWriteProAction implements Action {
 			forward = new ActionForward();
 			forward.setUrl("rBoardList.bo");
 		} else {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('등록 실패')");
-			out.println("history.back()");
-			out.println("</script>");
+			if (!serverFileName.contains(".jpg")) {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('jpg 파일을 등록해주세요')");
+				out.println("history.back()");
+				out.println("</script>");
+			} else {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('등록 실패')");
+				out.println("history.back()");
+				out.println("</script>");
+			}
 		}
 
 		return forward;

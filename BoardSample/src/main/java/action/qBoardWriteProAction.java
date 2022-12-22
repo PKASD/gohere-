@@ -17,10 +17,7 @@ public class qBoardWriteProAction implements Action {
 		// TODO Auto-generated method stub
 		BoardVO boardVO = new BoardVO();
 		boardVO.setContent(request.getParameter("content"));
-		boardVO.setEmail(request.getParameter("Email"));
-		boardVO.setIp(request.getRemoteAddr());
 		boardVO.setNum(Integer.parseInt(request.getParameter("num")));
-		boardVO.setPasswd(request.getParameter("passwd"));
 		boardVO.setRe_level(Integer.parseInt(request.getParameter("re_level")));
 		boardVO.setRe_step(Integer.parseInt(request.getParameter("re_step")));
 		// boardVO.setReadcount(0);
@@ -37,7 +34,7 @@ public class qBoardWriteProAction implements Action {
 		ActionForward forward = null;
 		if (registSuccess) {
 			forward = new ActionForward();
-			forward.setUrl("BoardStart.jsp");
+			forward.setUrl("qBoardList.bo");
 		} else {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();

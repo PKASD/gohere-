@@ -253,7 +253,7 @@ h1 {
 			%>
 			<div class="item-<%=i+1%>">
 				<a href="" class="card">
-					<div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-<%=i+1%>.jpg);"></div>
+					<div class="thumb" style="background-image: url(Image/review/<%=articleList.get(i).getReviewImage()%>.jpg");"></div>
 					<article>
 						<h1><%=article.getSubject()%></h1>
 						<p><%=article.getContent() %></p>
@@ -311,7 +311,6 @@ h1 {
 		<footer style="margin-top: 5%; background-color: gray; height: 100px; text-align: center; padding-top: 3%;">
 			<h2>Team 어디가 2022 프로젝트 진행중..</h2>
 		</footer>
-	</center>
 </body>
 
 </html>

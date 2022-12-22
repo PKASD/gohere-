@@ -135,10 +135,11 @@ int re_level = replyVO.getRe_level();
 			</div>
 		</section>
 	</header>
-	<form method="post" name="writeform" action="boardWritePro.bo">
-		<input type="hidden" name="num" value="<%=num%>"> <input type="hidden" name="ref" value="<%=ref%>"> <input type="hidden"
-			name="re_step" value="<%=re_step%>"
-		> <input type="hidden" name="re_level" value="<%=re_level%>">
+	<form method="post" name="writeform" action="qBoardWritePro.bo">
+		<input type="hidden" name="num" value="<%=num%>"> 
+		<input type="hidden" name="ref" value="<%=ref%>">
+		 <input type="hidden" name="re_step" value="<%=re_step%>">
+		 <input type="hidden" name="re_level" value="<%=re_level%>">
 
 		<div style="width: 80%; margin: auto;">
 			<div style="margin-top: 50px; text-align: center;">
@@ -159,21 +160,20 @@ int re_level = replyVO.getRe_level();
 				}
 				%>
 			</div>
+			<div class="form-group">
+				<label>◎ 작성자</label> <input type="text" class="form-control" id = "writer" name="writer" placeholder="작성자" value="작성자" required />
+			</div>
 
 			<div class="form-group">
 				<label>◎ 내용</label>
 				<textarea class="form-control" id="content" rows="5" name="content" placeholder="내용을 입력하세요." required></textarea>
 			</div>
 
-			<div class="form-group">
-				<label>◎ 비밀번호 <input type="password" class="form-control" maxlength="25" name="passwd" />
-				</label>
-			</div>
 			<br>
 
 			<div style="margin-bottom: 50px; text-align: right">
 				<button type="reset" class="btn btn-dark">다시 작성</button>
-				<button type="button" class="btn btn-dark" OnClick="window.location='boardList.bo'">목록보기</button>
+				<button type="button" class="btn btn-dark" OnClick="window.location='qBoardList.bo'">목록보기</button>
 				<button type="submit" class="btn btn-dark">등록</button>
 			</div>
 		</div>

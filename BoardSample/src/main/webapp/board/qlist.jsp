@@ -146,7 +146,7 @@ body {
 
 		<b>글목록(전체 글:<%=count%>)
 		</b>
-		<table width="1000">
+		<table width="1000px">
 			<tr>
 				<td align="right"><a href="qBoardWriteForm.bo">글쓰기</a></td>
 		</table>
@@ -154,7 +154,7 @@ body {
 		<%
 		if (count == 0) {
 		%>
-		<table width="1000" border="1" cellpadding="0" cellspacing="0">
+		<table width="1000px" border="1" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="center">게시판에 저장된 글이 없습니다.</td>
 		</table>
@@ -162,39 +162,39 @@ body {
 		<%
 		} else {
 		%>
-		<table border="1" width="1000" cellpadding="0" cellspacing="0" align="center">
-			<tr height="30" bgcolor="<%=value_c%>">
-				<td align="center" width="50">번 호</td>
-				<td align="center" width="500">제 목</td>
-				<td align="center" width="100">작성자</td>
-				<td align="center" width="100">작성일</td>
-				<td align="center" width="50">조 회</td>
+		<table border="1" width="1000px" cellpadding="0" cellspacing="0" align="center">
+			<tr height="30px" bgcolor="<%=value_c%>">
+				<td align="center" width="50px">번 호</td>
+				<td align="center" width="500px">제 목</td>
+				<td align="center" width="100px">작성자</td>
+				<td align="center" width="100px">작성일</td>
+				<td align="center" width="50px">조 회</td>
 			</tr>
 			<%
 			for (int i = 0; i < articleList.size(); i++) { // 게시글 생성
 				BoardVO article = (BoardVO) articleList.get(i);
 			%>
-			<tr height="30">
+			<tr height="30px">
 				<td align="center" width="50"><%=number--%></td>
-				<td width="250">
+				<td width="250px">
 					<%
 					int wid = 0;
 					if (article.getRe_level() > 0) {
 						wid = 5 * (article.getRe_level());
-					%> <img src="board/images/level.gif" width="<%=wid%>" height="16"> <img src="board/images/re.gif"> <%
+					%> <img src="board/images/level.gif" width="<%=wid%>" height="16px"> <img src="board/images/re.gif"> <%
  } else {
- %> <img src="board/images/level.gif" width="<%=wid%>" height="16"> <%
+ %> <img src="board/images/level.gif" width="<%=wid%>" height="16px"> <%
  }
  %> <a href="boardContent.bo?num=<%=article.getNum()%>&pageNum=<%=currentPage%>"><%=article.getSubject()%></a> <%
  if (article.getReadcount() >= 20) {
- %> <img src="board/images/hot.gif" border="0" height="16"> <%
+ %> <img src="board/images/hot.gif" border="0" height="16px"> <%
  }
  %>
 				</td>
-				<td align="center" width="100"><a href="mailto:<%=article.getEmail()%>"> <%=article.getWriter()%></a></td>
+				<td align="center" width="100px"><a href="<%=article.getWriter()%>"></a></td>
 				<!-- 작성자 -->
-				<td align="center" width="150"><%=sdf.format(article.getReg_date())%></td>
-				<td align="center" width="50"><%=article.getReadcount()%></td>
+				<td align="center" width="150px"><%=sdf.format(article.getReg_date())%></td>
+				<td align="center" width="50px"><%=article.getReadcount()%></td>
 			</tr>
 			<%
 			}
@@ -221,15 +221,13 @@ body {
 					for (int i = startPage; i <= endPage; i++) {
 					%>
 
-					<li class="page-item"><a href="qBoardList.bo?pageNum=<%=i%>" class="page-link" ><%=i%></a></li>
+					<li class="page-item"><a href="qBoardList.bo?pageNum=<%=i%>" class="page-link"><%=i%></a></li>
 					<%
 					}
 					if (endPage < pageCount) {
 					//마지막 페이지 그룹이 아니면
 					%>
-					<li class="page-item"><a href="qBoardList.bo?pageNum=<%=startPage + 10%>" class="page-link" aria-label="Next"> <span
-							aria-hidden="true"
-						>&raquo;</span></a></li>
+					<li class="page-item"><a href="qBoardList.bo?pageNum=<%=startPage + 10%>" class="page-link" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 					<%
 					//다음 페이지 그룹의 첫 페이지로
 					}
@@ -238,7 +236,5 @@ body {
 				</ul>
 			</nav>
 		</div>
-
-	</center>
 </body>
 </html>

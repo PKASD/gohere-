@@ -1,6 +1,11 @@
 <%@page import="vo.ReplyVO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/view/color.jsp"%>
+<%
+ReplyVO replyVO = (ReplyVO) request.getAttribute("replyVO");
+
+int num = replyVO.getNum();
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -91,14 +96,7 @@ body {
 </script>
 </head>
 
-<%
-ReplyVO replyVO = (ReplyVO) request.getAttribute("replyVO");
 
-int num = replyVO.getNum();
-int ref = replyVO.getRef();
-int re_step = replyVO.getRe_steb();
-int re_level = replyVO.getRe_level();
-%>
 
 <body>
 	<header class="bg-white py-5 ">
@@ -136,24 +134,14 @@ int re_level = replyVO.getRe_level();
 		</section>
 	</header>
 	<form action="rBoardWritePro.bo" name="writeform" method="POST" enctype="multipart/form-data">
+		<input type="hidden" name="num" value="<%=num%>" />
 		<div style="width: 80%; margin: auto;">
 			<div style="margin-top: 50px; text-align: center;">
 				<h4 style="color: gray">리뷰 게시판 글등록</h4>
 			</div>
 
 			<div class="form-group">
-				<label>◎ 제목</label>
-				<%
-				if (num == 0) {
-				%>
-				<input type="text" class="form-control" name="subject" placeholder="제목을 입력하세요." required />
-				<%
-				} else {
-				%>
-				<input type="text" class="form-control" name="subject" placeholder="제목을 입력하세요." value="[답변]" required />
-				<%
-				}
-				%>
+				<label>◎ 제목</label> <input type="text" class="form-control" name="subject" placeholder="제목을 입력하세요." required />
 			</div>
 			<div class="form-group">
 				<label>◎ 작성자</label> <input type="text" class="form-control" id="writer" name="writer" placeholder="작성자" required />
@@ -165,8 +153,7 @@ int re_level = replyVO.getRe_level();
 			</div>
 
 			<div>
-				<label for="exampleFormControlTextarea1">◎ 사진 첨부</label>
-					<input type="file" class="form-control" id="reviewImage" name="reviewImage">
+				<label for="exampleFormControlTextarea1">◎ 사진 첨부</label> <input multiple="multiple" type="file" id="reviewImage" name="reviewImage" />
 			</div>
 			<br>
 

@@ -72,20 +72,17 @@ public class BoardDAO {
 				re_level = 0;
 			}
 			// 쿼리를 작성
-			sql = "insert into board" + "(num,writer,email,subject,passwd,reg_date,";
-			sql += "ref,re_step,re_level,content,ip) " + "values(board_seq.nextval,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into board" + "(num,writer,subject,reg_date,";
+			sql += "ref,re_step,re_level,content) " + "values(board_seq.nextval,?,?,?,?,?,?,?)";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, article.getWriter());
-			pstmt.setString(2, article.getEmail());
-			pstmt.setString(3, article.getSubject());
-			pstmt.setString(4, article.getPasswd());
-			pstmt.setTimestamp(5, article.getReg_date());
-			pstmt.setInt(6, ref);
-			pstmt.setInt(7, re_step);
-			pstmt.setInt(8, re_level);
-			pstmt.setString(9, article.getContent());
-			pstmt.setString(10, article.getIp());
+			pstmt.setString(2, article.getSubject());
+			pstmt.setTimestamp(3, article.getReg_date());
+			pstmt.setInt(4, ref);
+			pstmt.setInt(5, re_step);
+			pstmt.setInt(6, re_level);
+			pstmt.setString(7, article.getContent());
 
 			insertCount = pstmt.executeUpdate();
 		} catch (Exception ex) {
@@ -101,7 +98,6 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		int insertCount = 0;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
 		// 새로운 관련글 번호를 저장할 변수
 		String sql = "insert into reviewboard(num,writer,subject,reg_date,readCount,recommend,content,reviewImage)" 
@@ -112,9 +108,9 @@ public class BoardDAO {
 			pstmt.setString(1, article.getWriter());
 			pstmt.setString(2, article.getSubject());
 			pstmt.setTimestamp(3, article.getReg_date());
-			pstmt.setString(4, article.getContent());
+			pstmt.setInt(4, 0);
 			pstmt.setInt(5, 0);
-			pstmt.setInt(6, 0);
+			pstmt.setString(6, article.getContent());
 			pstmt.setString(7, article.getReviewImage());
 
 			insertCount = pstmt.executeUpdate();
@@ -122,7 +118,6 @@ public class BoardDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			close(rs);
 			close(pstmt);
 		}
 		return insertCount;
@@ -170,16 +165,13 @@ public class BoardDAO {
 					article = new BoardVO();
 					article.setNum(rs.getInt("num"));
 					article.setWriter(rs.getString("writer"));
-					article.setEmail(rs.getString("email"));
 					article.setSubject(rs.getString("subject"));
-					article.setPasswd(rs.getString("passwd"));
 					article.setReg_date(rs.getTimestamp("reg_date"));
 					article.setReadcount(rs.getInt("readcount"));
 					article.setRef(rs.getInt("ref"));
 					article.setRe_step(rs.getInt("re_step"));
 					article.setRe_level(rs.getInt("re_level"));
 					article.setContent(rs.getString("content"));
-					article.setIp(rs.getString("ip"));
 
 					articleList.add(article);
 
@@ -280,16 +272,13 @@ public class BoardDAO {
 				article = new BoardVO();
 				article.setNum(rs.getInt("num"));
 				article.setWriter(rs.getString("writer"));
-				article.setEmail(rs.getString("email"));
 				article.setSubject(rs.getString("subject"));
-				article.setPasswd(rs.getString("passwd"));
 				article.setReg_date(rs.getTimestamp("reg_date"));
 				article.setReadcount(rs.getInt("readcount"));
 				article.setRef(rs.getInt("ref"));
 				article.setRe_step(rs.getInt("re_step"));
 				article.setRe_level(rs.getInt("re_level"));
 				article.setContent(rs.getString("content"));
-				article.setIp(rs.getString("ip"));
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -314,16 +303,13 @@ public class BoardDAO {
 				article = new BoardVO();
 				article.setNum(rs.getInt("num"));
 				article.setWriter(rs.getString("writer"));
-				article.setEmail(rs.getString("email"));
 				article.setSubject(rs.getString("subject"));
-				article.setPasswd(rs.getString("passwd"));
 				article.setReg_date(rs.getTimestamp("reg_date"));
 				article.setReadcount(rs.getInt("readcount"));
 				article.setRef(rs.getInt("ref"));
 				article.setRe_step(rs.getInt("re_step"));
 				article.setRe_level(rs.getInt("re_level"));
 				article.setContent(rs.getString("content"));
-				article.setIp(rs.getString("ip"));
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -349,20 +335,14 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				dbpasswd = rs.getString("passwd");
-				if (dbpasswd.equals(boardVO.getPasswd())) {
-					sql = "update board set writer=?,email=?,subject=?,passwd=?";
-					sql += ",content=? where num=?";
+				dbpasswd = rs.getString("writer");
+				if (dbpasswd.equals(boardVO.getWriter())) {
+					sql = "update board set subject=?,content=? where num=?";
 					pstmt = con.prepareStatement(sql);
-
-					pstmt.setString(1, boardVO.getWriter());
-					pstmt.setString(2, boardVO.getEmail());
-					pstmt.setString(3, boardVO.getSubject());
-					pstmt.setString(4, boardVO.getPasswd());
-					pstmt.setString(5, boardVO.getContent());
-					pstmt.setInt(6, boardVO.getNum());
+					pstmt.setString(1, boardVO.getSubject());
+					pstmt.setString(2, boardVO.getContent());
+					pstmt.setInt(3, boardVO.getNum());
 					updateCount = pstmt.executeUpdate();
-
 				}
 			}
 		} catch (Exception ex) {
